@@ -24,7 +24,7 @@ import com.elifokass.traveltracker.databinding.ActivityMapsBinding
 import com.google.android.material.snackbar.Snackbar
 import java.util.prefs.AbstractPreferences
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -33,6 +33,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     private lateinit var sharedPreferences: SharedPreferences
     private var trackBoolean: Boolean? = null
+    private var selectedLatitude : Double? = null
+    private var selectedLongitude : Double? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,10 +51,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         sharedPreferences = this.getSharedPreferences("com.elifokass.traveltracker", MODE_PRIVATE)
         trackBoolean = false
+
+        selectedLatitude = 0.0
+        selectedLongitude = 0.0
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.setOnMapLongClickListener(this)
 
         //LatLng -> latitude , longitude - enlem, boylam
 
@@ -75,7 +81,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,15f))
                     sharedPreferences.edit().putBoolean("trackBoolean",true).apply()
                 }
-
             }
         }
 
@@ -102,11 +107,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             mMap.isMyLocationEnabled = true
         }
-
-
-
-
-
     }
     private fun registerLauncher(){
         permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){result ->
@@ -126,5 +126,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this@MapsActivity,"Permission Needed",Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    override fun onMapLongClick(p0: LatLng) {
+
+        mMap.clear()
+
+        mMap.addMarker(MarkerOptions().position(p0))
+
+        selectedLatitude = p0.latitude
+        selectedLongitude = p0.longitude
     }
 }
