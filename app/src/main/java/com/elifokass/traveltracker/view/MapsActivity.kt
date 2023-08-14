@@ -1,4 +1,4 @@
-package com.elifokass.traveltracker
+package com.elifokass.traveltracker.view
 
 import android.Manifest
 import android.content.SharedPreferences
@@ -14,6 +14,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.elifokass.traveltracker.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -23,7 +24,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.elifokass.traveltracker.databinding.ActivityMapsBinding
 import com.google.android.material.snackbar.Snackbar
-import java.util.prefs.AbstractPreferences
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 

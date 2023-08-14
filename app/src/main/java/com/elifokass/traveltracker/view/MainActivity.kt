@@ -1,10 +1,11 @@
-package com.elifokass.traveltracker
+package com.elifokass.traveltracker.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.elifokass.traveltracker.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

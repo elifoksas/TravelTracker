@@ -15,7 +15,7 @@
         android:theme="@style/Theme.TravelTracker"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
 
             <intent-filter>
@@ -30,7 +30,7 @@
             android:value="AIzaSyCVNFpOJmCkiRD8KT7kgnPxiuD3DvcQrWA" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".view.MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps">
 
