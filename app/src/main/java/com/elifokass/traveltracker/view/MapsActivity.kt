@@ -191,6 +191,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLon
         )
     }
     fun delete(view: View){
+        placeFromMain?.let {
+            compositeDisposable.add(
+                dao.delete(it)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::handleResponse)
+            )
+        }
 
     }
     private fun handleResponse(){
